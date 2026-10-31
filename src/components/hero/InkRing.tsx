@@ -36,10 +36,10 @@ export function InkRing({
       >
         {/* Primary imperfect hand-drawn circle path in light black */}
         <motion.path
-          d="M 170 28 
-             C 255 25, 315 82, 315 168 
-             C 315 252, 248 312, 165 313 
-             C 80 314, 25 250, 26 165 
+          d="M 170 28
+             C 255 25, 315 82, 315 168
+             C 315 252, 248 312, 165 313
+             C 80 314, 25 250, 26 165
              C 27 80, 86 25, 178 28
              C 212 29, 270 48, 292 80"
           stroke={color}
@@ -63,10 +63,10 @@ export function InkRing({
 
         {/* Secondary subtle sketched charcoal over-stroke */}
         <motion.path
-          d="M 162 33 
-             C 238 31, 306 90, 308 172 
-             C 310 244, 254 306, 170 307 
-             C 85 308, 32 244, 33 170 
+          d="M 162 33
+             C 238 31, 306 90, 308 172
+             C 310 244, 254 306, 170 307
+             C 85 308, 32 244, 33 170
              C 34 96, 94 34, 175 32"
           stroke={color}
           strokeWidth="0.9"
