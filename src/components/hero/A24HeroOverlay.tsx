@@ -53,18 +53,105 @@ export function A24HeroOverlay({
                 {society.name}
               </h2>
 
-              {/* Clean Society Brief */}
-              <div className="space-y-2 max-w-xs sm:max-w-sm">
-                <p className="font-serif italic text-xs sm:text-sm text-stone-700 leading-relaxed">
-                  &ldquo;{society.tagline}&rdquo;
-                </p>
+              {/* A24 Hairline Credits Ledger Table (.info-content) */}
+              {(() => {
+                const isAms = society.slug === "ams";
 
-                <div className="flex items-center gap-2.5 font-mono text-[10px] text-stone-500 uppercase tracking-wider pt-1 border-t border-stone-300/80">
-                  <span>Coordinator: <strong className="text-ink font-medium">{society.leads?.[0]?.name || "Student Coordinator"}</strong></span>
-                  <span>•</span>
-                  <span>{society.stats?.membersCount || 45}+ Members</span>
-                </div>
-              </div>
+                const coordinators = isAms
+                  ? "Aditya Halwai, Jashan Goyal, Rajiv Teja"
+                  : society.leads?.map((l: any) => l.name).join(", ") || "Society Head";
+
+                const teamStrength = isAms
+                  ? "3 Coordinators, 8 Senior Members, 18 Members, 67 Volunteers"
+                  : society.stats?.teamStrengthBreakdown || `${society.stats?.membersCount || 40}+ Active Members`;
+
+                const email = isAms
+                  ? "ams.society@iiita.ac.in"
+                  : society.email || `${society.slug}@iiita.ac.in`;
+
+                const instagramUrl = isAms
+                  ? "https://instagram.com/thunderboltams"
+                  : society.socialLinks?.instagram ||
+                    `https://instagram.com/${
+                      society.slug === "geneticx"
+                        ? "geneticx_crew"
+                        : `${society.slug}_iiita`
+                    }`;
+
+                const instagramHandle = isAms
+                  ? "@thunderboltams"
+                  : society.socialLinks?.instagram
+                    ? `@${society.socialLinks.instagram
+                        .replace(/^https?:\/\/(www\.)?instagram\.com\//, "")
+                        .replace(/\/$/, "")}`
+                    : `@${
+                        society.slug === "geneticx"
+                          ? "geneticx_crew"
+                          : `${society.slug}_iiita`
+                      }`;
+
+                return (
+                  <div className="w-full border-t border-stone-300/90 text-xs font-mono">
+                    {/* 1. COORDINATORS */}
+                    <div className="grid grid-cols-12 py-1.5 border-b border-stone-200/80 items-center">
+                      <span className="col-span-4 text-[10px] uppercase tracking-wider text-ink-faint">
+                        COORDINATORS
+                      </span>
+                      <span className="col-span-8 font-serif font-medium text-ink text-right text-xs leading-tight">
+                        {coordinators}
+                      </span>
+                    </div>
+
+                    {/* 2. TEAM STRENGTH */}
+                    <div className="grid grid-cols-12 py-1.5 border-b border-stone-200/80 items-center">
+                      <span className="col-span-4 text-[10px] uppercase tracking-wider text-ink-faint">
+                        TEAM STRENGTH
+                      </span>
+                      <span className="col-span-8 font-serif font-medium text-ink text-right text-xs leading-tight">
+                        {teamStrength}
+                      </span>
+                    </div>
+
+                    {/* 3. EMAIL */}
+                    <div className="grid grid-cols-12 py-1.5 border-b border-stone-200/80 items-center">
+                      <span className="col-span-4 text-[10px] uppercase tracking-wider text-ink-faint">
+                        EMAIL
+                      </span>
+                      <a
+                        href={`mailto:${email}`}
+                        className="col-span-8 font-serif font-medium text-ink text-right text-xs truncate hover:underline hover:text-stone-600 transition-colors"
+                      >
+                        {email}
+                      </a>
+                    </div>
+
+                    {/* 4. INSTAGRAM */}
+                    <div className="grid grid-cols-12 py-1.5 border-b border-stone-200/80 items-center">
+                      <span className="col-span-4 text-[10px] uppercase tracking-wider text-ink-faint">
+                        INSTAGRAM
+                      </span>
+                      <a
+                        href={instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="col-span-8 font-serif font-medium text-amber-800 text-right text-xs truncate hover:underline transition-colors"
+                      >
+                        {instagramHandle}
+                      </a>
+                    </div>
+
+                    {/* 5. ABOUT THE SOCIETY */}
+                    <div className="py-2 border-b border-stone-300/90">
+                      <span className="block text-[10px] uppercase tracking-wider text-ink-faint mb-1">
+                        ABOUT THE SOCIETY
+                      </span>
+                      <p className="font-serif text-xs text-stone-700 leading-snug italic line-clamp-2">
+                        &ldquo;{society.description || society.tagline}&rdquo;
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
             </motion.div>
           </AnimatePresence>
         </div>
